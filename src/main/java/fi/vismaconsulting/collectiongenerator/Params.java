@@ -3,7 +3,7 @@ package fi.vismaconsulting.collectiongenerator;
 public class Params {
     String folderPath;
     String attributeToBeChanged;
-    String attributes;
+    String newAttribute;
 
     public Params() {
     }
@@ -25,10 +25,10 @@ public class Params {
     }
 
     public String getAttributes() {
-        return attributes;
+        return newAttribute;
     }
 
     public void setAttributes(String attributes) {
-        this.attributes = attributes;
+        this.newAttribute = attributes;
     }
 }
