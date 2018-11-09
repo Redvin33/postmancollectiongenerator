@@ -12,6 +12,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -23,11 +24,14 @@ public class Requesthandler {
         try {
             String content = getFileContentAsString(params.getFolderPath());
             JSONObject jsonObject = new JSONObject(content);
+            for(String param : params.getAttributes()) {
+                generateCollectionsWithNewUrl(param, jsonObject);
+            }
+
+
         } catch (Exception e) {
-
+            System.out.println(e.getMessage());
         }
-
-
 
     }
 
@@ -52,6 +56,45 @@ public class Requesthandler {
         }
 
     }
+
+    private void generateCollectionsWithNewUrl(String urlString, JSONObject content) {
+        try {
+            URL url = new URL(urlString);
+            String protocol = url.getProtocol();
+            String[] hosts = url.getHost().split("\\.");
+
+            String paths = url.getPath();
+            String query = url.getQuery();
+            //String[] queryparams = query.split("");
+            String[] pathParams = paths.substring(1).split("/");
+
+            JSONArray requests = content.getJSONArray("item");
+            JSONArray pathsArray = new JSONArray();
+            JSONArray hostsArray = new JSONArray();
+            for(int i = 0; i < pathParams.length; i++) {
+                pathsArray.put(pathParams[i]);
+            }
+
+            for(int i = 0; i< hosts.length; i++) {
+                hostsArray.put(hosts[i]);
+            }
+
+            for (int i = 0; i < requests.length(); i++) {
+                JSONObject obj = requests.getJSONObject(i).getJSONObject("request").getJSONObject("url");
+                obj.put("raw", url);
+                obj.put("path", pathsArray);
+                obj.put("hosts", hostsArray);
+
+            }
+            System.out.println(content);
+
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
 
 
     public void convertJSONObjectToFile(JSONObject json, String target) throws Exception {
