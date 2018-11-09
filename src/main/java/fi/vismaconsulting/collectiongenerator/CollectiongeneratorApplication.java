@@ -9,13 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.io.File;
 
 @SpringBootApplication
-public class CollectiongeneratorApplication implements CommandLineRunner {
+public class CollectiongeneratorApplication  {
 
-	Requesthandler handler;
-
-	public CollectiongeneratorApplication(Requesthandler handler) {
-		this.handler = handler;
-	}
 
 
 
@@ -24,11 +19,5 @@ public class CollectiongeneratorApplication implements CommandLineRunner {
 
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
-		String s = handler.getFileContentAsString("/Users/tmcf/Desktop/moist.json");
-		JSONObject j = new JSONObject(s);
-		handler.convertJSONObjectToFile(j, "/Users/tmcf/Desktop/");
 
-	}
 }

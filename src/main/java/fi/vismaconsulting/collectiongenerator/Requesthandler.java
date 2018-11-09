@@ -25,7 +25,8 @@ public class Requesthandler {
             String content = getFileContentAsString(params.getFolderPath());
             JSONObject jsonObject = new JSONObject(content);
             for(String param : params.getAttributes()) {
-                generateCollectionsWithNewUrl(param, jsonObject);
+                JSONObject obj = generateCollectionsWithNewUrl(param, jsonObject);
+                convertJSONObjectToFile(obj, params.getTargetPath());
             }
 
 
@@ -57,7 +58,7 @@ public class Requesthandler {
 
     }
 
-    private void generateCollectionsWithNewUrl(String urlString, JSONObject content) {
+    private JSONObject generateCollectionsWithNewUrl(String urlString, JSONObject content) {
         try {
             URL url = new URL(urlString);
             String protocol = url.getProtocol();
@@ -88,13 +89,15 @@ public class Requesthandler {
             }
             System.out.println(content);
 
+            return content;
+
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return content;
         }
 
     }
-
 
 
     public void convertJSONObjectToFile(JSONObject json, String target) throws Exception {

@@ -20,6 +20,7 @@ public class Controller {
         attributes.add("https://stackoverflow.com/questions/11443928/how-to-modify-values-of-jsonobject-jsonarray-directly");
         params.setAttributes(attributes);
         params.setFolderPath("C:\\CollectionGenerator2\\src\\main\\resources\\testikokoelma.postman_collection.json");
+        params.setTargetPath("C:\\Bizagi\\");
         handler.generateCollections(params);
 
     }
