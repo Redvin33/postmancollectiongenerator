@@ -22,7 +22,10 @@ public class Requesthandler {
         try {
             String content = getFileContentAsString(params.getFolderPath());
             JSONObject jsonObject = new JSONObject(content);
-            generateCollectionsWithNewUrl(params.getAttributes(), jsonObject);
+            for(String param : params.getAttributes()) {
+                generateCollectionsWithNewUrl(param, jsonObject);
+            }
+
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -53,7 +56,6 @@ public class Requesthandler {
     }
 
     private void generateCollectionsWithNewUrl(String urlString, JSONObject content) {
-
         try {
             URL url = new URL(urlString);
             String paths = url.getPath();
@@ -74,8 +76,6 @@ public class Requesthandler {
                 System.out.println(obj);
                 System.out.println(content);
             }
-
-
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

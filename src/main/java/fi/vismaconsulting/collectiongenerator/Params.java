@@ -1,9 +1,11 @@
 package fi.vismaconsulting.collectiongenerator;
 
+import java.util.List;
+
 public class Params {
     private String folderPath;
     private String attributeToBeChanged;
-    private String attributes;
+    private List<String> attributes;
 
     public Params() {
     }
@@ -24,11 +26,11 @@ public class Params {
         this.attributeToBeChanged = attributeToBeChanged;
     }
 
-    public String getAttributes() {
+    public List<String> getAttributes() {
         return attributes;
     }
 
-    public void setAttributes(String attributes) {
+    public void setAttributes(List<String> attributes) {
         this.attributes = attributes;
     }
 }
