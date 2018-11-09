@@ -84,7 +84,8 @@ public class Requesthandler {
                 JSONObject obj = requests.getJSONObject(i).getJSONObject("request").getJSONObject("url");
                 obj.put("raw", url);
                 obj.put("path", pathsArray);
-                obj.put("hosts", hostsArray);
+                obj.put("host", hostsArray);
+                obj.put("protocol", protocol);
 
             }
             System.out.println(content);
