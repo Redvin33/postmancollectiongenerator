@@ -26,8 +26,6 @@ public class CollectiongeneratorApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		//  /Users/tmcf/Desktop/Moist.postman_collection.json
-
 		String s = handler.getFileContentAsString("/Users/tmcf/Desktop/moist.json");
 		JSONObject j = new JSONObject(s);
 		handler.convertJSONObjectToFile(j, "/Users/tmcf/Desktop/");

@@ -101,11 +101,7 @@ public class Requesthandler {
 
         String collectionName = json.getJSONObject("info").getString("name");
 
-        if(collectionName.charAt(collectionName.length() -1) != '/') {
-            collectionName = "/" + collectionName + ".json";
-        } else {
-            collectionName = collectionName + ".json";
-        }
+        collectionName = collectionName + ".json";
 
         Path p = Paths.get(target + collectionName);
         BufferedWriter writer = Files.newBufferedWriter(p);
