@@ -13,8 +13,8 @@ public class Controller {
     @GetMapping()
     public void generateCollections() {
         Params params = new Params();
-        params.setAttributes("doijso");
-        params.setAttributeToBeChanged("iofdwoijfe");
+
+        params.setAttributes("https://stackoverflow.com/questions/11443928/how-to-modify-values-of-jsonobject-jsonarray-directly");
         params.setFolderPath("C:\\CollectionGenerator2\\src\\main\\resources\\testikokoelma.postman_collection.json");
         handler.generateCollections(params);
 

@@ -1,9 +1,9 @@
 package fi.vismaconsulting.collectiongenerator;
 
 public class Params {
-    String folderPath;
-    String attributeToBeChanged;
-    String attributes;
+    private String folderPath;
+    private String attributeToBeChanged;
+    private String attributes;
 
     public Params() {
     }
