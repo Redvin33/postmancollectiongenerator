@@ -13,9 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class Requesthandler {
@@ -66,12 +64,14 @@ public class Requesthandler {
 
             String paths = url.getPath();
             String query = url.getQuery();
+            List<KeyValue> queryParams = getMapFromUrlQuery(query);
             //String[] queryparams = query.split("");
             String[] pathParams = paths.substring(1).split("/");
 
             JSONArray requests = content.getJSONArray("item");
             JSONArray pathsArray = new JSONArray();
             JSONArray hostsArray = new JSONArray();
+
             for(int i = 0; i < pathParams.length; i++) {
                 pathsArray.put(pathParams[i]);
             }
@@ -83,8 +83,19 @@ public class Requesthandler {
             for (int i = 0; i < requests.length(); i++) {
                 JSONObject obj = requests.getJSONObject(i).getJSONObject("request").getJSONObject("url");
                 obj.put("raw", url);
-                obj.put("path", pathsArray);
-                obj.put("host", hostsArray);
+                if(pathsArray.length() > 0) {
+                    obj.put("path", pathsArray);
+                }
+                if(hostsArray.length() > 0 ) {
+                    obj.put("host", hostsArray);
+                }
+                if(queryParams.size() > 0 ) {
+                    JSONArray queryArray = new JSONArray();
+                    for(KeyValue kv : queryParams) {
+                        queryArray.put(new JSONObject(kv));
+                    }
+                    obj.put("query", queryArray);
+                }
                 obj.put("protocol", protocol);
 
             }
@@ -100,6 +111,20 @@ public class Requesthandler {
 
     }
 
+
+    private List<KeyValue> getMapFromUrlQuery(String query) {
+        String[] pairs = query.split("&");
+        List<KeyValue> queryParamMap = new ArrayList<>();
+        for(String pair : pairs) {
+            String[] keyValuePair = pair.split("=");
+            KeyValue keyValue = new KeyValue();
+            keyValue.setKey(keyValuePair[0]);
+            keyValue.setValue(keyValuePair[1]);
+            queryParamMap.add(keyValue);
+        }
+        return queryParamMap;
+
+    }
 
     public void convertJSONObjectToFile(JSONObject json, String target) throws Exception {
 
