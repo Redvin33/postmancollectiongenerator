@@ -18,6 +18,7 @@ public class Controller {
         Params params = new Params();
         List<String> attributes = new ArrayList<>();
         attributes.add("https://stackoverflow.com/questions/11443928/how-to-modify-values-of-jsonobject-jsonarray-directly?test=23&uusi=eere");
+        attributes.add("https://google.com");
         params.setAttributes(attributes);
         params.setFolderPath("C:\\CollectionGenerator2\\src\\main\\resources\\testikokoelma.postman_collection.json");
         params.setTargetPath("C:\\Bizagi\\");

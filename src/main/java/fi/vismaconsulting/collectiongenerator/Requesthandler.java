@@ -17,6 +17,7 @@ import java.util.*;
 
 @Component
 public class Requesthandler {
+    static int number = 0;
 
     public void generateCollections(Params params) {
         try {
@@ -26,8 +27,6 @@ public class Requesthandler {
                 JSONObject obj = generateCollectionsWithNewUrl(param, jsonObject);
                 convertJSONObjectToFile(obj, params.getTargetPath());
             }
-
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -100,10 +99,7 @@ public class Requesthandler {
 
             }
             System.out.println(content);
-
             return content;
-
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return content;
@@ -128,10 +124,9 @@ public class Requesthandler {
 
     public void convertJSONObjectToFile(JSONObject json, String target) throws Exception {
 
-        String collectionName = json.getJSONObject("info").getString("name");
-
+        String collectionName = json.getJSONObject("info").getString("name") + number;
+        number++;
         collectionName = collectionName + ".json";
-
         Path p = Paths.get(target + collectionName);
         BufferedWriter writer = Files.newBufferedWriter(p);
         writer.write(json.toString());
