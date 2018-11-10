@@ -2,6 +2,8 @@ package fi.vismaconsulting.collectiongenerator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -25,4 +27,10 @@ public class Controller {
         handler.generateCollections(params);
 
     }
+
+    @PostMapping(value="generate")
+    public void generateCollections2(@RequestBody Params params) {
+        handler.generateCollections(params);
+    }
+
 }
